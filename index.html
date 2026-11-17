@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>청년취업사관학교 [KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발</title>
+    <meta name="description" content="청년취업사관학교 동작캠퍼스 x KT그룹 실무 중심 AX 전략 수립 및 멀티 에이전트 서비스 개발 교육과정 안내" />
+    <meta property="og:title" content="청년취업사관학교 [KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발" />
+    <meta property="og:description" content="청년취업사관학교 동작캠퍼스 x KT그룹 실무 중심 AX 전략 수립 및 멀티 에이전트 서비스 개발 교육과정 안내" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="referrer" content="no-referrer" />
+
+    <!-- Pretendard 웹폰트 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", sans-serif;
+        color: #0f172a;
+        background-color: #ffffff;
+      }
+
+      body {
+        -webkit-font-smoothing: antialiased;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* 스크롤 올리고 내릴 때마다 나타나고 사라지는 애니메이션 */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(32px) scale(0.985);
+        transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* 마우스 커서 호버 시 살짝 커지는 인터랙티브 공통 효과 */
+      .hover-scale {
+        transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+      }
+
+      .hover-scale:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 85, 255, 0.1);
+      }
+
+      /* Header */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 1px solid #f1f5f9;
+        height: 78px;
+      }
+
+      .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.2s ease;
+      }
+
+      .brand:hover {
+        transform: scale(1.025);
+      }
+
+      .brand-logo {
+        height: 44px;
+        width: auto;
+        max-width: 220px;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
+      }
+
+      .brand-text {
+        font-size: 19px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 480px) {
+        .brand-logo {
+          height: 34px;
+          max-width: 160px;
+        }
+        .brand-text {
+          font-size: 16px;
+        }
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        list-style: none;
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+      }
+
+      .nav-menu a {
+        font-size: 15.5px;
+        font-weight: 600;
+        color: #334155;
+        transition: color 0.15s, transform 0.15s;
+        display: inline-block;
+      }
+
+      .nav-menu a:hover {
+        color: #0055ff;
+        transform: scale(1.08);
+      }
+
+      .btn-header-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 22px;
+        background-color: #0055ff;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
+      }
+
+      .btn-header-cta:hover {
+        background-color: #0047d6;
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 85, 255, 0.3);
+      }
+
+      /* Hero Section */
+      .hero-section {
+        position: relative;
+        isolation: isolate;
+        background-color: #f2f7ff;
+        padding: 64px 0 84px;
+        border-bottom: 1px solid #f1f5f9;
+        overflow: hidden;
+      }
+
+      /* 배경 이미지 내 텍스트 제거 및 그래픽 블렌딩 레이어 */
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* 이미지 내부의 글자(얇은 획)를 지우고 색감·입체 그래픽만 남기는 레이어 */
+      .hero-bg-img-clean {
+        position: absolute;
+        top: -8%;
+        left: -14%;
+        width: 124%;
+        height: 116%;
+        object-fit: cover;
+        object-position: right center;
+        filter: url(#erase-bg-text) saturate(1.12) contrast(1.04);
+        opacity: 0.9;
+      }
+
+      /* 우측 그래픽 디테일 보강 레이어 (텍스트 영역은 마스크로 완전히 제거) */
+      .hero-bg-img-graphic {
+        position: absolute;
+        top: 0;
+        right: -4%;
+        width: 62%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 88% center;
+        filter: url(#soften-bg-text) saturate(1.08);
+        -webkit-mask-image: radial-gradient(ellipse 75% 75% at 76% 48%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 82%);
+        mask-image: radial-gradient(ellipse 75% 75% at 76% 48%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 82%);
+        opacity: 0.85;
+      }
+
+      .hero-bg-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(242, 247, 255, 0.35) 0%, rgba(242, 247, 255, 0.08) 48%, rgba(255, 255, 255, 0.94) 88%, #ffffff 100%),
+          linear-gradient(90deg, #f2f7ff 0%, #f2f7ff 40%, rgba(242, 247, 255, 0.92) 56%, rgba(242, 247, 255, 0.38) 78%, rgba(242, 247, 255, 0.15) 100%);
+      }
+
+      @media (max-width: 900px) {
+        .hero-bg-img-graphic {
+          display: none;
+        }
+        .hero-bg-overlay {
+          background:
+            linear-gradient(180deg, rgba(242, 247, 255, 0.82) 0%, rgba(242, 247, 255, 0.9) 65%, #ffffff 100%);
+        }
+      }
+
+      .hero-content {
+        max-width: 680px;
+        margin-bottom: 58px;
+      }
+
+      .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .hero-eyebrow-logo {
+        height: 68px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
+      }
+
+      @media (max-width: 600px) {
+        .hero-eyebrow-logo {
+          height: 54px;
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(36px, 5.2vw, 56px);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.18;
+        margin-bottom: 24px;
+        word-break: keep-all;
+      }
+
+      .title-blue {
+        color: #0055ff;
+        display: block;
+      }
+
+      .title-dark {
+        color: #0f172a;
+        display: block;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        color: #334155;
+        line-height: 1.68;
+        margin-bottom: 34px;
+        max-width: 640px;
+        word-break: keep-all;
+      }
+
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: #0055ff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+      }
+
+      .btn-primary:hover {
+        background-color: #0047d6;
+        transform: scale(1.04);
+        box-shadow: 0 8px 22px rgba(0, 85, 255, 0.35);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: rgba(255, 255, 255, 0.92);
+        border: 1px solid #bfd7fe;
+        color: #0055ff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .btn-secondary:hover {
+        background-color: #ffffff;
+        border-color: #0055ff;
+        transform: scale(1.04);
+      }
+
+      /* 4-Column Summary Box */
+      .summary-box {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 26px 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .summary-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px rgba(0, 85, 255, 0.1);
+      }
+
+      @media (max-width: 900px) {
+        .hero-bg-img {
+          width: 100%;
+          opacity: 0.45;
+        }
+        .hero-bg-overlay {
+          background:
+            linear-gradient(180deg, rgba(242, 247, 255, 0.78) 0%, rgba(242, 247, 255, 0.88) 65%, #ffffff 100%);
+        }
+      }
+
+      .hero-content {
+        max-width: 680px;
+        margin-bottom: 58px;
+      }
+
+      .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .hero-eyebrow-logo {
+        height: 68px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
+      }
+
+      @media (max-width: 600px) {
+        .hero-eyebrow-logo {
+          height: 54px;
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(36px, 5.2vw, 56px);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.18;
+        margin-bottom: 24px;
+        word-break: keep-all;
+      }
+
+      .title-blue {
+        color: #0055ff;
+        display: block;
+      }
+
+      .title-dark {
+        color: #0f172a;
+        display: block;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        color: #334155;
+        line-height: 1.68;
+        margin-bottom: 34px;
+        max-width: 640px;
+        word-break: keep-all;
+      }
+
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: #0055ff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+      }
+
+      .btn-primary:hover {
+        background-color: #0047d6;
+        transform: scale(1.04);
+        box-shadow: 0 8px 22px rgba(0, 85, 255, 0.35);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: #ffffff;
+        border: 1px solid #bfd7fe;
+        color: #0055ff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .btn-secondary:hover {
+        background-color: #f8faff;
+        border-color: #0055ff;
+        transform: scale(1.04);
+      }
+
+      /* 4-Column Summary Box */
+      .summary-box {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 26px 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .summary-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 85, 255, 0.08);
+      }
+
+      @media (max-width: 900px) {
+        .summary-box {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .summary-box {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .summary-col {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #f1f5f9;
+        padding-right: 16px;
+      }
+
+      .summary-col:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      @media (max-width: 900px) {
+        .summary-col {
+          border-right: none;
+          padding-right: 0;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #f1f5f9;
+        }
+        .summary-col:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+
+      .summary-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0055ff;
+        margin-bottom: 6px;
+      }
+
+      .summary-val {
+        font-size: 18px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 4px;
+        line-height: 1.32;
+      }
+
+      .summary-desc {
+        font-size: 13.5px;
+        color: #64748b;
+        line-height: 1.48;
+      }
+
+      /* Curriculum Section */
+      .section-curriculum {
+        padding: 84px 0;
+        background-color: #ffffff;
+      }
+
+      .section-title-blue {
+        font-size: 32px;
+        font-weight: 800;
+        color: #0055ff;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+      }
+
+      .section-subtitle-gray {
+        font-size: 16px;
+        color: #64748b;
+        margin-bottom: 42px;
+      }
+
+      /* Progress Bar */
+      .ratio-box {
+        margin-bottom: 46px;
+      }
+
+      .ratio-labels {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: #334155;
+        margin-bottom: 11px;
+      }
+
+      .ratio-track {
+        height: 9px;
+        width: 100%;
+        background-color: #f1f5f9;
+        border-radius: 9999px;
+        display: flex;
+        overflow: hidden;
+      }
+
+      .ratio-fill-theory {
+        height: 100%;
+        width: 38%;
+        background-color: #a8ccfc;
+      }
+
+      .ratio-fill-project {
+        height: 100%;
+        width: 62%;
+        background-color: #0055ff;
+      }
+
+      /* Accordion List */
+      .accordion-list {
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .accordion-item {
+        padding: 26px 0;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .accordion-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+        padding: 8px 12px;
+        margin: -8px -12px;
+        border-radius: 12px;
+        transition: background-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .accordion-header:hover {
+        background-color: #f6faff;
+        transform: scale(1.01);
+      }
+
+      .accordion-title-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .accordion-num {
+        font-size: 16px;
+        font-weight: 800;
+        color: #0055ff;
+        margin-top: 2px;
+      }
+
+      .accordion-main-title {
+        font-size: 19px;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.32;
+      }
+
+      .accordion-desc-line {
+        font-size: 14.5px;
+        color: #64748b;
+        margin-top: 4px;
+      }
+
+      .accordion-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .hour-badge {
+        font-size: 13px;
+        font-weight: 700;
+        color: #64748b;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 4px 12px;
+        background-color: #ffffff;
+      }
+
+      /* 눈에 띄는 + / - 토글 버튼 스타일 */
+      .toggle-badge-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #eaf2ff;
+        border: 1.5px solid #bfd7fe;
+        color: #0055ff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        font-weight: 800;
+        line-height: 1;
+        cursor: pointer;
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        flex-shrink: 0;
+        box-shadow: 0 1px 4px rgba(0, 85, 255, 0.12);
+      }
+
+      .accordion-header:hover .toggle-badge-btn {
+        background-color: #0055ff;
+        border-color: #0055ff;
+        color: #ffffff;
+        transform: scale(1.15);
+        box-shadow: 0 3px 10px rgba(0, 85, 255, 0.28);
+      }
+
+      /* 닫혀서 + 상태일 때 특히 눈에 띄게 강조 */
+      .toggle-badge-btn.collapsed {
+        background-color: #0055ff;
+        color: #ffffff;
+        border-color: #0055ff;
+        box-shadow: 0 2px 8px rgba(0, 85, 255, 0.25);
+      }
+
+      .accordion-body {
+        margin-top: 18px;
+        padding-left: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .accordion-bullet {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        color: #475569;
+      }
+
+      .bullet-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #94a3b8;
+        flex-shrink: 0;
+      }
+
+      .core-pill {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 3px 9px;
+        background-color: #e8f1ff;
+        color: #0055ff;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 6px;
+        vertical-align: middle;
+      }
+
+      /* Project Output Box */
+      .project-output-box {
+        margin-top: 54px;
+        background-color: #f3f7ff;
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 30px 34px;
+      }
+
+      .output-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: #0055ff;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+        margin-bottom: 22px;
+      }
+
+      .output-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .output-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+      }
+
+      .output-col {
+        border-right: 1px solid #dce8ff;
+        padding-right: 20px;
+        transition: transform 0.2s ease;
+      }
+
+      .output-col:hover {
+        transform: translateY(-2px);
+      }
+
+      .output-col:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      @media (max-width: 768px) {
+        .output-col {
+          border-right: none;
+          padding-right: 0;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #dce8ff;
+        }
+        .output-col:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+
+      .output-head {
+        font-size: 16.5px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 5px;
+      }
+
+      .output-desc {
+        font-size: 14px;
+        color: #475569;
+      }
+
+      /* Benefits Section */
+      .section-benefits {
+        padding: 84px 0;
+        background-color: #fafcff;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .benefit-subhead {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+
+      .subhead-num {
+        font-size: 19px;
+        font-weight: 900;
+        color: #0055ff;
+      }
+
+      .subhead-title {
+        font-size: 19px;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .benefits-4grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      @media (max-width: 900px) {
+        .benefits-4grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .benefits-4grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .benefit-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .benefit-cat-tag {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0055ff;
+        margin-bottom: 8px;
+      }
+
+      .benefit-card-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 9px;
+        line-height: 1.35;
+      }
+
+      .benefit-card-text {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.58;
+        white-space: pre-line;
+      }
+
+      .benefit-card-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 2px;
+      }
+
+      .benefit-card-list li {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.52;
+        position: relative;
+        padding-left: 11px;
+      }
+
+      .benefit-card-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #0055ff;
+        font-weight: 700;
+      }
+
+      .learning-support-box {
+        background-color: #f3f7ff;
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 26px 30px;
+        margin-bottom: 50px;
+      }
+
+      .learning-box-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: #0055ff;
+        margin-bottom: 18px;
+      }
+
+      .learning-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .learning-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+      }
+
+      .learning-col {
+        border-right: 1px solid #dce8ff;
+        padding-right: 16px;
+        transition: transform 0.2s ease;
+      }
+
+      .learning-col:hover {
+        transform: translateY(-2px);
+      }
+
+      .learning-col:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      @media (max-width: 768px) {
+        .learning-col {
+          border-right: none;
+          padding-right: 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #dce8ff;
+        }
+        .learning-col:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+
+      .learning-head {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 5px;
+      }
+
+      .learning-desc {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.55;
+      }
+
+      .benefits-3grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      @media (max-width: 768px) {
+        .benefits-3grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .benefits-note {
+        font-size: 14.5px;
+        color: #64748b;
+        margin-top: 16px;
+      }
+
+      /* Eligibility Section */
+      .section-eligibility {
+        padding: 84px 0;
+        background-color: #ffffff;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .section-title-dark {
+        font-size: 32px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        margin-bottom: 32px;
+      }
+
+      .eligibility-check-box {
+        background-color: #f3f7ff;
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 26px 30px;
+        margin-bottom: 38px;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15.5px;
+        color: #1e293b;
+      }
+
+      .check-icon {
+        color: #0055ff;
+        font-weight: 900;
+        font-size: 16px;
+      }
+
+      /* FAQ Section */
+      .section-faq {
+        padding: 84px 0;
+        background-color: #fafcff;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .fee-box {
+        background-color: #f3f7ff;
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 26px 30px;
+        margin-bottom: 38px;
+      }
+
+      .fee-box-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: #0055ff;
+        margin-bottom: 8px;
+      }
+
+      .fee-box-text {
+        font-size: 15px;
+        color: #334155;
+        line-height: 1.65;
+      }
+
+      /* Location Card */
+      .campus-location-box {
+        margin-top: 64px;
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 30px 34px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .location-title {
+        font-size: 19px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 6px;
+      }
+
+      .location-addr {
+        font-size: 15px;
+        color: #475569;
+        line-height: 1.55;
+      }
+
+      .location-sub {
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #f5f8fc;
+        border-top: 1px solid #e2e8f0;
+        padding: 42px 0;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      .footer-logo {
+        height: 42px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 10px;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
+      }
+
+      .footer-admin-line {
+        color: #334155;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Nav Header -->
+    <header class="site-header">
+      <div class="container header-wrapper">
+        <a href="#" class="brand" aria-label="청년취업사관학교 AI+ Academy KT그룹 홈">
+          <img
+            src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+            alt="청년취업사관학교 AI+ Academy · KT그룹 로고"
+            class="brand-logo"
+            referrerpolicy="no-referrer"
+          />
+          <span class="brand-text">청년취업사관학교</span>
+        </a>
+
+        <ul class="nav-menu">
+          <li><a href="#curriculum">배우는 내용</a></li>
+          <li><a href="#benefits">교육생 혜택</a></li>
+          <li><a href="#qualification">지원자격</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="btn-header-cta">
+          상담신청 ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- 배경 이미지 내부의 텍스트(글자 획)를 지우기 위한 SVG 모폴로지 필터 -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;" aria-hidden="true">
+      <defs>
+        <filter id="erase-bg-text" x="-10%" y="-10%" width="120%" height="120%">
+          <!-- 글자 획(얇은 고대비 픽셀)을 주변 배경색으로 덮어 지움 -->
+          <feMorphology operator="erode" radius="7" in="SourceGraphic" result="eroded" />
+          <feMorphology operator="dilate" radius="7" in="eroded" result="opened" />
+          <feGaussianBlur stdDeviation="14" in="opened" result="smoothed" />
+        </filter>
+        <filter id="soften-bg-text" x="-10%" y="-10%" width="120%" height="120%">
+          <feMorphology operator="erode" radius="5" in="SourceGraphic" result="eroded2" />
+          <feMorphology operator="dilate" radius="5" in="eroded2" result="opened2" />
+          <feGaussianBlur stdDeviation="6" in="opened2" result="smoothed2" />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <!-- 배경 이미지 레이어 (이미지 속 텍스트는 지우고 그래픽 분위기만 연출) -->
+      <div class="hero-bg" aria-hidden="true">
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMzEg/MDAxNzk0NTU0OTQzMjI2.2q2B6ufxKGp5Kfg5zQ-1ICMwHYDt_Wcp67duJJvjCGIg.c9okeuon82nojinjM9Q5ZIiRVvTOTVSf-B0-Do0jXfQg.JPEG/e4a2be038cade.jpg?type=w773"
+          alt=""
+          class="hero-bg-img-clean"
+          referrerpolicy="no-referrer"
+        />
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMzEg/MDAxNzk0NTU0OTQzMjI2.2q2B6ufxKGp5Kfg5zQ-1ICMwHYDt_Wcp67duJJvjCGIg.c9okeuon82nojinjM9Q5ZIiRVvTOTVSf-B0-Do0jXfQg.JPEG/e4a2be038cade.jpg?type=w773"
+          alt=""
+          class="hero-bg-img-graphic"
+          referrerpolicy="no-referrer"
+        />
+        <div class="hero-bg-overlay"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <!-- Eyebrow Logo -->
+          <div class="hero-eyebrow">
+            <img
+              src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+              alt="KT그룹 × AI+ Academy"
+              class="hero-eyebrow-logo"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+
+          <!-- Title -->
+          <h1 class="hero-title">
+            <span class="title-blue">[KT그룹] AX전략 기획 및</span>
+            <span class="title-dark">멀티 에이전트 서비스 개발</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="hero-subtitle">
+            이론과 실습을 넘나드는 AX 실전 커리큘럼과<br />
+            종합 프로젝트·맞춤형 취업 컨설팅으로 AX 전문가로 도약하세요.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-buttons">
+            <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              과정 상담신청 ↗
+            </a>
+            <a href="#curriculum" class="btn-secondary">
+              커리큘럼 살펴보기 ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Summary Cards -->
+        <div class="summary-box hover-scale">
+          <div class="summary-col">
+            <span class="summary-label">교육기간</span>
+            <span class="summary-val">2026.12.14 ~ 2027.02.25</span>
+            <span class="summary-desc">방학 활용 10주 단기 집중 교육<br />(총 350시간)</span>
+          </div>
+
+          <div class="summary-col">
+            <span class="summary-label">오프라인 교육</span>
+            <span class="summary-val" style="font-size: 17px;">청년취업사관학교 동작캠퍼스</span>
+            <span class="summary-desc">서울 동작구 노량진로 10<br />스페이스살림 2층 · 대방역 인근</span>
+          </div>
+
+          <div class="summary-col">
+            <span class="summary-label">선발 인원</span>
+            <span class="summary-val">25명 소수 정예</span>
+            <span class="summary-desc">4~5개 조 팀 프로젝트 운영</span>
+          </div>
+
+          <div class="summary-col">
+            <span class="summary-label">우수 수료생 혜택</span>
+            <span class="summary-val">KT그룹 및 협력사</span>
+            <span class="summary-desc">연계 채용 기회 제공</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="section-curriculum">
+      <div class="container reveal-on-scroll">
+        <h2 class="section-title-blue">커리큘럼</h2>
+        <p class="section-subtitle-gray">과목을 누르면 상세 학습 내용을 확인할 수 있어요.</p>
+
+        <!-- Ratio Bar -->
+        <div class="ratio-box">
+          <div class="ratio-labels">
+            <span>이론·실습·특강 133시간</span>
+            <span>실무 프로젝트 217시간 · 62%</span>
+          </div>
+          <div class="ratio-track">
+            <div class="ratio-fill-theory"></div>
+            <div class="ratio-fill-project"></div>
+          </div>
+        </div>
+
+        <!-- Modules Accordion (첫 번째 항목만 열림, 나머지 닫힘) -->
+        <div class="accordion-list">
+          <!-- 01 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('curr-1', this)">
+              <div class="accordion-title-wrap">
+                <span class="accordion-num">01</span>
+                <div>
+                  <h3 class="accordion-main-title">Agentic AI</h3>
+                  <p class="accordion-desc-line">검색·도구 활용부터 멀티 에이전트 협업까지</p>
+                </div>
+              </div>
+              <div class="accordion-right">
+                <span class="hour-badge">70h</span>
+                <button class="toggle-badge-btn" aria-label="상세 내용 접기/펼치기">—</button>
+              </div>
+            </div>
+            <div class="accordion-body" id="curr-1" style="display: flex;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>Prompt & Context Engineering, LLMOps</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>LangChain·RAG 기반 검색 및 도구 호출</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>LangGraph 워크플로우 제어, LangSmith 모니터링·평가, MCP 연동</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>역할별 멀티 에이전트 설계·구현</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('curr-2', this)">
+              <div class="accordion-title-wrap">
+                <span class="accordion-num">02</span>
+                <div>
+                  <h3 class="accordion-main-title">AI Native 웹서비스 개발</h3>
+                  <p class="accordion-desc-line">AI 기능을 사용자가 쓰는 웹서비스로 연결</p>
+                </div>
+              </div>
+              <div class="accordion-right">
+                <span class="hour-badge">35h</span>
+                <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+              </div>
+            </div>
+            <div class="accordion-body" id="curr-2" style="display: none;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>AI 활용 프론트엔드·백엔드 구조 설계</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>데이터베이스 연동, CRUD·게시판 구현</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>OpenAPI·LLM API 연동, JSON 응답 처리·스트리밍</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('curr-3', this)">
+              <div class="accordion-title-wrap">
+                <span class="accordion-num">03</span>
+                <div>
+                  <h3 class="accordion-main-title">AX 기획·관리</h3>
+                  <p class="accordion-desc-line">산업의 문제를 찾고 도입 효과와 리스크 검토</p>
+                </div>
+              </div>
+              <div class="accordion-right">
+                <span class="hour-badge">14h</span>
+                <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+              </div>
+            </div>
+            <div class="accordion-body" id="curr-3" style="display: none;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>금융·물류 등 산업별 문제 분석과 AI 전환 시나리오</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>도입 비용·기대효과(ROI) 분석 및 사업 심의 기반 Risk 관리</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>요구사항·서비스 아키텍처·파이프라인 기획</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('curr-4', this)">
+              <div class="accordion-title-wrap">
+                <span class="accordion-num">04</span>
+                <div>
+                  <h3 class="accordion-main-title">취업·트렌드 특강</h3>
+                  <p class="accordion-desc-line">AI·AX 현직자 특강 및 직무별 취업특강 진행</p>
+                </div>
+              </div>
+              <div class="accordion-right">
+                <span class="hour-badge">14h</span>
+                <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+              </div>
+            </div>
+            <div class="accordion-body" id="curr-4" style="display: none;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>AI·AX 현직자 특강: AI 에이전트 기술 동향·기업 AX 사례</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>현업에서 요구하는 기획·개발 역량</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>취업특강 진행: 산업별 취업서류·면접·포트폴리오 전략</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('curr-5', this)">
+              <div class="accordion-title-wrap">
+                <span class="accordion-num">05</span>
+                <div>
+                  <h3 class="accordion-main-title">
+                    기업 실무 연계 프로젝트
+                    <span class="core-pill">핵심 과정</span>
+                  </h3>
+                  <p class="accordion-desc-line">현업 경험 보유 코치와 함께 서비스 기획·개발·배포</p>
+                </div>
+              </div>
+              <div class="accordion-right">
+                <span class="hour-badge">217h</span>
+                <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+              </div>
+            </div>
+            <div class="accordion-body" id="curr-5" style="display: none;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>프로젝트 진행 시 현업 경험 보유한 코치 투입 및 실무 콘텐츠 지원</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>산업별 직무 자동화 에이전트 구축 및 Multi-Agent 협업 구현</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>AX 전략 수립부터 웹서비스 통합·배포까지 팀 프로젝트 수행 (4~5개 조 중 우수 프로젝트 선정 시 30만원 상당 시상품 증정)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 프로젝트 Output Box -->
+        <div class="project-output-box hover-scale reveal-on-scroll">
+          <h4 class="output-title">프로젝트 Output</h4>
+          <div class="output-grid">
+            <div class="output-col">
+              <div class="output-head">AX 전략 기획서</div>
+              <div class="output-desc">문제 정의 · ROI 분석 · 도입 리스크</div>
+            </div>
+            <div class="output-col">
+              <div class="output-head">멀티 에이전트 시스템</div>
+              <div class="output-desc">역할별 협업 코드 · 평가 리포트</div>
+            </div>
+            <div class="output-col">
+              <div class="output-head">웹서비스 배포본</div>
+              <div class="output-desc">동작하는 서비스 · API 명세 · 시연 환경</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="section-benefits">
+      <div class="container reveal-on-scroll">
+        <h2 class="section-title-blue">교육생 혜택</h2>
+        <p class="section-subtitle-gray">실무 경험부터 학습 환경, 취업·네트워킹까지 빈틈없이 지원합니다.</p>
+
+        <!-- 01 교육 및 프로젝트 핵심 혜택 -->
+        <div style="margin-bottom: 56px;">
+          <div class="benefit-subhead">
+            <span class="subhead-num">01</span>
+            <h3 class="subhead-title">교육 및 프로젝트 핵심 혜택</h3>
+          </div>
+
+          <div class="benefits-4grid">
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">채용 연계</span>
+              <h4 class="benefit-card-title">우수 수료생 채용 기회</h4>
+              <ul class="benefit-card-list">
+                <li>KT그룹·협력사 연계 채용 기회 제공</li>
+                <li>미래내일 인턴형 일경험 연계·기업 매칭 지원</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">단기 집중 교육</span>
+              <h4 class="benefit-card-title">방학 활용 10주 완성</h4>
+              <ul class="benefit-card-list">
+                <li>방학 기간을 활용한 단기간 집중 교육 (10주)</li>
+                <li>AX 과제 수행으로 실무 포트폴리오 완성</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">현업 밀착 코칭</span>
+              <h4 class="benefit-card-title">현업 코치 투입 & 특강</h4>
+              <ul class="benefit-card-list">
+                <li>프로젝트 진행 시 현업 경험 보유한 코치 투입</li>
+                <li>AI·AX 현직자 특강 진행</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">우수 프로젝트 시상</span>
+              <h4 class="benefit-card-title">우수팀 시상품 증정</h4>
+              <ul class="benefit-card-list">
+                <li>4~5개 조 중 우수 프로젝트 선정 시 30만원 상당의 시상품 증정</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 학습 환경 및 스터디 지원 -->
+          <div class="learning-support-box hover-scale">
+            <h4 class="learning-box-title">학습 환경 및 스터디 지원 · 학습에 집중할 수 있도록</h4>
+            <div class="learning-grid">
+              <div class="learning-col">
+                <div class="learning-head">교육 기자재·계정 제공</div>
+                <div class="learning-desc">노트북, 듀얼 모니터, Claude Code, OpenAI API, AWS 계정, Teams 계정 등 지원</div>
+              </div>
+              <div class="learning-col">
+                <div class="learning-head">중식 및 간식 제공</div>
+                <div class="learning-desc">교육기간 내 중식 및 간식 상시 제공</div>
+              </div>
+              <div class="learning-col">
+                <div class="learning-head">스터디그룹 활동 지원</div>
+                <div class="learning-desc">스터디그룹 활동비 지원 및 그룹장 추가 혜택 제공</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 맞춤형 취업 지원 및 네트워킹 -->
+        <div>
+          <div class="benefit-subhead">
+            <span class="subhead-num">02</span>
+            <h3 class="subhead-title">맞춤형 취업 지원 및 네트워킹 프로그램</h3>
+          </div>
+
+          <div class="benefits-4grid">
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">자격증·면접·인적성</span>
+              <h4 class="benefit-card-title">바우처 및 인적성 시험</h4>
+              <ul class="benefit-card-list">
+                <li>AICE 자격증 응시 바우처 지급</li>
+                <li>사람인 AI 모의면접 바우처 지급</li>
+                <li>대한상공회의소 주관 인적성 시험 진행</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">취업 지원</span>
+              <h4 class="benefit-card-title">1:1 취업 컨설팅 & 특강</h4>
+              <ul class="benefit-card-list">
+                <li>실전 취업특강 진행</li>
+                <li>1:1 개별 취업 컨설팅 (포트폴리오 및 자기소개서 첨삭)</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">취업 리워드</span>
+              <h4 class="benefit-card-title">취업 축하금 지급</h4>
+              <ul class="benefit-card-list">
+                <li>수료 후 3개월 이내 취업 시 <strong>40만원</strong> 지급</li>
+                <li>수료 후 6개월 이내 취업 시 <strong>20만원</strong> 지급</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">네트워킹</span>
+              <h4 class="benefit-card-title">교육생·현직자 네트워킹</h4>
+              <ul class="benefit-card-list">
+                <li>교육생 간 네트워킹 프로그램 운영</li>
+                <li>현직자 워크숍 및 네트워킹 운영 (VIPS 식사 제공)</li>
+                <li>취업캠프 및 박람회 참여 기회</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="benefits-note">수료 후에도 최신 AI 취·창업 교육자료를 지원합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eligibility Section (첫 번째 항목만 열림, 나머지 닫힘) -->
+    <section id="qualification" class="section-eligibility">
+      <div class="container reveal-on-scroll">
+        <h2 class="section-title-dark">지원 자격 및 참여 대상</h2>
+
+        <div class="eligibility-check-box hover-scale">
+          <div class="check-item">
+            <span class="check-icon">✓</span>
+            <span>AI 취·창업을 희망하는 <strong>만 15세 이상 서울시민 또는 서울 거소자</strong></span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon">✓</span>
+            <span>교육기간 동안 <strong>전일제 오프라인 참여 가능</strong></span>
+          </div>
+        </div>
+
+        <div class="accordion-list">
+          <!-- 기초 역량 (첫 번째 항목: 열려있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('elig-1', this)">
+              <h3 class="accordion-main-title">수강에 필요한 기초 역량 확인하기</h3>
+              <button class="toggle-badge-btn" aria-label="상세 내용 접기/펼치기">—</button>
+            </div>
+            <div class="accordion-body" id="elig-1" style="display: flex; padding-left: 0;">
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>Python 기초 문법 이해 및 코드 작성·실행</span>
+              </div>
+              <div class="accordion-bullet">
+                <span class="bullet-dot"></span>
+                <span>OpenAPI·LLM 기초 활용 경험: API 키 발급·호출, 프롬프트 구성, JSON 응답 처리</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우대 역량 (닫혀있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('elig-2', this)">
+              <h3 class="accordion-main-title">우대 역량 확인하기</h3>
+              <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+            </div>
+            <div class="accordion-body" id="elig-2" style="display: none; padding-left: 0;">
+              <p style="font-size: 15px; color: #475569; line-height: 1.65;">
+                HTTP Polling·SSE·WebSocket, Python 비동기 프로그래밍(async/await), LangChain·LangGraph 실습 또는 RAG 파이프라인 구현 경험이 있으면 우대됩니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- 제출 증빙서류 (닫혀있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('elig-3', this)">
+              <h3 class="accordion-main-title">입학 시 제출할 증빙서류</h3>
+              <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+            </div>
+            <div class="accordion-body" id="elig-3" style="display: none; padding-left: 0;">
+              <div class="accordion-bullet" style="align-items: flex-start;">
+                <span class="bullet-dot" style="margin-top: 9px;"></span>
+                <span><strong>서울시민·거소자:</strong> 주민등록등본, 기숙사·고시원 거주 확인서, 본인명의 공공요금고지서·부동산 계약서 등</span>
+              </div>
+              <div class="accordion-bullet" style="align-items: flex-start;">
+                <span class="bullet-dot" style="margin-top: 9px;"></span>
+                <span><strong>타지역 거주자:</strong> 서울 소재 대학(원) 재학·졸업증명서 또는 서울 소재 기업 근무 경력증명서 등 해당 요건 증빙</span>
+              </div>
+              <p style="font-size: 13.5px; color: #64748b; margin-top: 6px;">
+                입학 시 증빙을 확인하며, 사실과 다를 경우 입학이 취소될 수 있습니다. 기업 선발 기준에 따라 선발·운영합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ & Location Section (첫 번째 항목만 열림, 나머지 닫힘) -->
+    <section id="faq" class="section-faq">
+      <div class="container reveal-on-scroll">
+        <h2 class="section-title-dark">신청 전 확인하세요</h2>
+
+        <div class="fee-box hover-scale">
+          <h4 class="fee-box-title">교육비·예치금 안내</h4>
+          <p class="fee-box-text">
+            교육비는 지원되며, 최종 합격자는 <strong>예치금 10만원</strong>을 납부합니다.<br />
+            출석률 80% 이상 또는 전체 과정의 30% 이상 이수 후 취·창업 성공 시 <strong>100% 전액 반환</strong>됩니다.
+          </p>
+        </div>
+
+        <div class="accordion-list">
+          <!-- FAQ 1 (첫 번째 항목: 열려있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('faq-1', this)">
+              <h3 class="accordion-main-title">예치금 10만원은 언제 반환되나요?</h3>
+              <button class="toggle-badge-btn" aria-label="상세 내용 접기/펼치기">—</button>
+            </div>
+            <div class="accordion-body" id="faq-1" style="display: flex; padding-left: 0;">
+              <p style="font-size: 15px; color: #475569; line-height: 1.65;">
+                교육비는 지원되며, 최종 합격자는 예치금 10만원을 납부합니다. 출석률 80% 이상 또는 전체 과정의 30% 이상 이수 후 취·창업 성공 시 100% 전액 반환됩니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 (닫혀있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('faq-2', this)">
+              <h3 class="accordion-main-title">수료 기준과 조기 취·창업 시 기준은?</h3>
+              <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+            </div>
+            <div class="accordion-body" id="faq-2" style="display: none; padding-left: 0;">
+              <p style="font-size: 15px; color: #475569; line-height: 1.65;">
+                출석률 80% 이상 또는 전체 과정의 30% 이상 이수 후 취·창업에 성공하면 수료로 인정되며 예치금도 전액 반환됩니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 (닫혀있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('faq-3', this)">
+              <h3 class="accordion-main-title">코딩을 처음 시작하는 사람도 가능한가요?</h3>
+              <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+            </div>
+            <div class="accordion-body" id="faq-3" style="display: none; padding-left: 0;">
+              <p style="font-size: 15px; color: #475569; line-height: 1.65;">
+                Python과 OpenAPI·LLM 활용 기초가 필요한 실전 과정입니다. 지원자격의 기초 역량 안내를 확인하고, 준비 수준이 고민된다면 상담을 통해 문의해 주세요.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 (닫혀있음) -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem('faq-4', this)">
+              <h3 class="accordion-main-title">어떤 기관이 운영하는 과정인가요?</h3>
+              <button class="toggle-badge-btn collapsed" aria-label="상세 내용 접기/펼치기">+</button>
+            </div>
+            <div class="accordion-body" id="faq-4" style="display: none; padding-left: 0;">
+              <p style="font-size: 15px; color: #475569; line-height: 1.65;">
+                청년취업사관학교(SeSAC)와 KT그룹 AI+ 아카데미가 함께하는 과정입니다. AI+ Academy는 대한상공회의소가 서울시·AI 선도기업 등과 협력해 운영하는 AI 특화 교육 프로그램입니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campus Location Card -->
+        <div class="campus-location-box hover-scale">
+          <div>
+            <h3 class="location-title">청년취업사관학교 동작캠퍼스</h3>
+            <p class="location-addr">
+              서울 동작구 노량진로 10 스페이스살림 2층<br />
+              <span class="location-sub">1호선·신림선 대방역 2·3번 출구 인근 · 도보 약 2~3분</span>
+            </p>
+          </div>
+          <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            과정 상담신청 ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+          alt="청년취업사관학교 × KT그룹 AI+ Academy 로고"
+          class="footer-logo"
+          referrerpolicy="no-referrer"
+        />
+        <p class="footer-admin-line">홈페이지 운영/담당자: 이재현</p>
+        <p>© 청년취업사관학교(SeSAC) & KT Group AI+ Academy. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Interactive Vanilla JS for Accordions & Scroll Reveal -->
+    <script>
+      function toggleItem(id, headerEl) {
+        const bodyEl = document.getElementById(id);
+        const indicator = headerEl.querySelector('.toggle-badge-btn');
+        if (bodyEl.style.display === 'none') {
+          bodyEl.style.display = 'flex';
+          indicator.textContent = '—';
+          indicator.classList.remove('collapsed');
+        } else {
+          bodyEl.style.display = 'none';
+          indicator.textContent = '+';
+          indicator.classList.add('collapsed');
+        }
+      }
+
+      // 스크롤 올리고 내릴 때마다 나타나고 사라지는 애니메이션 (IntersectionObserver)
+      const observerOptions = {
+        threshold: 0.08,
+        rootMargin: '-20px 0px -20px 0px'
+      };
+
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        scrollObserver.observe(el);
+      });
+    </script>
+  </body>
+</html>
